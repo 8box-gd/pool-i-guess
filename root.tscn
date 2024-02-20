@@ -1,9 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://cysak54jo4at3"]
+[gd_scene load_steps=17 format=3 uid="uid://cysak54jo4at3"]
 
 [ext_resource type="PhysicsMaterial" uid="uid://bdp45weligtix" path="res://poolballmaterial.tres" id="1_n3dws"]
 [ext_resource type="Script" path="res://root.gd" id="1_vknud"]
 [ext_resource type="Script" path="res://normalball.gd" id="3_pqcnd"]
 [ext_resource type="Texture2D" uid="uid://br74yvsgdl1lh" path="res://srko.png" id="3_yhhcs"]
+[ext_resource type="Texture2D" uid="uid://cqr2obh00rx8g" path="res://BallLabels/Ball1.png" id="5_nx181"]
+[ext_resource type="Texture2D" uid="uid://kekb0i5popey" path="res://BallLabels/Ball2.png" id="6_dg31e"]
+[ext_resource type="Texture2D" uid="uid://bbh803q04r6ol" path="res://BallLabels/Ball3.png" id="7_1eu2k"]
+[ext_resource type="Texture2D" uid="uid://k1qiu30j7mhf" path="res://BallLabels/Ball4.png" id="8_55ghd"]
+[ext_resource type="Texture2D" uid="uid://bpvf41um4d5x8" path="res://BallLabels/Ball5.png" id="9_1ux2p"]
+[ext_resource type="Texture2D" uid="uid://dp01tuqwncyej" path="res://BallLabels/Ball6.png" id="10_mniko"]
+[ext_resource type="Texture2D" uid="uid://qfw6a6jndisv" path="res://BallLabels/Ball7.png" id="11_ddcnc"]
+[ext_resource type="Texture2D" uid="uid://vw4fd8pcn6d7" path="res://BallLabels/Ball8.png" id="12_36a7t"]
+[ext_resource type="Texture2D" uid="uid://d0wiiheliu27d" path="res://BallLabels/Ball9.png" id="13_owb1g"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5x4fs"]
 bounce = 0.1
@@ -16,7 +25,8 @@ radius = 32.0
 
 [node name="root" type="Node2D"]
 script = ExtResource("1_vknud")
-cue_force = 1500.0
+cue_force = 1800.0
+moving_damp = 0.4
 
 [node name="Table" type="StaticBody2D" parent="."]
 physics_material_override = SubResource("PhysicsMaterial_5x4fs")
@@ -74,27 +84,17 @@ contact_monitor = true
 linear_damp = 0.5
 script = ExtResource("3_pqcnd")
 ball_ID = 1
+moving_damp = 0.4
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="NormalBalls/ball1"]
-modulate = Color(0.803922, 0.682353, 0, 1)
 scale = Vector2(0.0444445, 0.0444445)
-texture = ExtResource("3_yhhcs")
+texture = ExtResource("5_nx181")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NormalBalls/ball1"]
+visible = false
 shape = SubResource("CircleShape2D_v10cv")
 debug_color = Color(0.803922, 0.682353, 0, 0.419608)
-
-[node name="Label" type="Label" parent="NormalBalls/ball1"]
-offset_left = -20.0
-offset_top = -17.0
-offset_right = 20.0
-offset_bottom = 17.0
-theme_override_font_sizes/font_size = 24
-text = "➊"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 1
 
 [node name="ball2" type="RigidBody2D" parent="NormalBalls"]
 position = Vector2(804, 304)
@@ -103,27 +103,17 @@ gravity_scale = 0.0
 linear_damp = 0.5
 script = ExtResource("3_pqcnd")
 ball_ID = 2
+moving_damp = 0.4
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="NormalBalls/ball2"]
-modulate = Color(0.160784, 0.368627, 1, 1)
 scale = Vector2(0.0444445, 0.0444445)
-texture = ExtResource("3_yhhcs")
+texture = ExtResource("6_dg31e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NormalBalls/ball2"]
+visible = false
 shape = SubResource("CircleShape2D_v10cv")
 debug_color = Color(0.286275, 0.486275, 1, 0.419608)
-
-[node name="Label" type="Label" parent="NormalBalls/ball2"]
-offset_left = -20.0
-offset_top = -17.0
-offset_right = 20.0
-offset_bottom = 17.0
-theme_override_font_sizes/font_size = 24
-text = "➋"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 1
 
 [node name="ball3" type="RigidBody2D" parent="NormalBalls"]
 position = Vector2(804, 336)
@@ -132,27 +122,17 @@ gravity_scale = 0.0
 linear_damp = 0.5
 script = ExtResource("3_pqcnd")
 ball_ID = 3
+moving_damp = 0.4
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="NormalBalls/ball3"]
-modulate = Color(1, 0.231373, 0.219608, 1)
 scale = Vector2(0.0444445, 0.0444445)
-texture = ExtResource("3_yhhcs")
+texture = ExtResource("7_1eu2k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NormalBalls/ball3"]
+visible = false
 shape = SubResource("CircleShape2D_v10cv")
 debug_color = Color(1, 0.231373, 0.219608, 0.419608)
-
-[node name="Label" type="Label" parent="NormalBalls/ball3"]
-offset_left = -20.0
-offset_top = -17.0
-offset_right = 20.0
-offset_bottom = 17.0
-theme_override_font_sizes/font_size = 24
-text = "➌"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 1
 
 [node name="ball4" type="RigidBody2D" parent="NormalBalls"]
 position = Vector2(776, 288)
@@ -161,27 +141,17 @@ gravity_scale = 0.0
 linear_damp = 0.5
 script = ExtResource("3_pqcnd")
 ball_ID = 4
+moving_damp = 0.4
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="NormalBalls/ball4"]
-modulate = Color(0.760784, 0.137255, 1, 1)
 scale = Vector2(0.0444445, 0.0444445)
-texture = ExtResource("3_yhhcs")
+texture = ExtResource("8_55ghd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NormalBalls/ball4"]
+visible = false
 shape = SubResource("CircleShape2D_v10cv")
 debug_color = Color(0.760784, 0.137255, 1, 0.419608)
-
-[node name="Label" type="Label" parent="NormalBalls/ball4"]
-offset_left = -20.0
-offset_top = -17.0
-offset_right = 20.0
-offset_bottom = 17.0
-theme_override_font_sizes/font_size = 24
-text = "➍"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 1
 
 [node name="ball5" type="RigidBody2D" parent="NormalBalls"]
 position = Vector2(776, 352)
@@ -190,27 +160,17 @@ gravity_scale = 0.0
 linear_damp = 0.5
 script = ExtResource("3_pqcnd")
 ball_ID = 5
+moving_damp = 0.4
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="NormalBalls/ball5"]
-modulate = Color(0.921569, 0.443137, 0, 1)
 scale = Vector2(0.0444445, 0.0444445)
-texture = ExtResource("3_yhhcs")
+texture = ExtResource("9_1ux2p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NormalBalls/ball5"]
+visible = false
 shape = SubResource("CircleShape2D_v10cv")
 debug_color = Color(0.811765, 0.392157, 0, 0.419608)
-
-[node name="Label" type="Label" parent="NormalBalls/ball5"]
-offset_left = -20.0
-offset_top = -17.0
-offset_right = 20.0
-offset_bottom = 17.0
-theme_override_font_sizes/font_size = 24
-text = "➎"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 1
 
 [node name="ball6" type="RigidBody2D" parent="NormalBalls"]
 position = Vector2(748, 304)
@@ -219,27 +179,17 @@ gravity_scale = 0.0
 linear_damp = 0.5
 script = ExtResource("3_pqcnd")
 ball_ID = 6
+moving_damp = 0.4
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="NormalBalls/ball6"]
-modulate = Color(0, 0.705882, 0.0627451, 1)
 scale = Vector2(0.0444445, 0.0444445)
-texture = ExtResource("3_yhhcs")
+texture = ExtResource("10_mniko")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NormalBalls/ball6"]
+visible = false
 shape = SubResource("CircleShape2D_v10cv")
 debug_color = Color(0, 0.643137, 0.0627451, 0.419608)
-
-[node name="Label" type="Label" parent="NormalBalls/ball6"]
-offset_left = -20.0
-offset_top = -17.0
-offset_right = 20.0
-offset_bottom = 17.0
-theme_override_font_sizes/font_size = 24
-text = "➏"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 1
 
 [node name="ball7" type="RigidBody2D" parent="NormalBalls"]
 position = Vector2(748, 336)
@@ -248,27 +198,17 @@ gravity_scale = 0.0
 linear_damp = 0.5
 script = ExtResource("3_pqcnd")
 ball_ID = 7
+moving_damp = 0.4
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="NormalBalls/ball7"]
-modulate = Color(0.603922, 0.0980392, 0, 1)
 scale = Vector2(0.0444445, 0.0444445)
-texture = ExtResource("3_yhhcs")
+texture = ExtResource("11_ddcnc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NormalBalls/ball7"]
+visible = false
 shape = SubResource("CircleShape2D_v10cv")
 debug_color = Color(0.603922, 0.0980392, 0, 0.419608)
-
-[node name="Label" type="Label" parent="NormalBalls/ball7"]
-offset_left = -20.0
-offset_top = -17.0
-offset_right = 20.0
-offset_bottom = 17.0
-theme_override_font_sizes/font_size = 24
-text = "➐"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 1
 
 [node name="ball8" type="RigidBody2D" parent="NormalBalls"]
 position = Vector2(720, 320)
@@ -277,29 +217,18 @@ gravity_scale = 0.0
 linear_damp = 0.5
 script = ExtResource("3_pqcnd")
 ball_ID = 8
+moving_damp = 0.4
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="NormalBalls/ball8"]
-modulate = Color(0.270588, 0.270588, 0.270588, 1)
 scale = Vector2(0.0444445, 0.0444445)
-texture = ExtResource("3_yhhcs")
+texture = ExtResource("12_36a7t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NormalBalls/ball8"]
 visible = false
 modulate = Color(0.396078, 0.396078, 0.396078, 0.988235)
 shape = SubResource("CircleShape2D_v10cv")
 debug_color = Color(0.396078, 0.396078, 0.396078, 0.419608)
-
-[node name="Label" type="Label" parent="NormalBalls/ball8"]
-offset_left = -20.0
-offset_top = -17.0
-offset_right = 20.0
-offset_bottom = 17.0
-theme_override_font_sizes/font_size = 24
-text = "➑"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 1
 
 [node name="ball9" type="RigidBody2D" parent="NormalBalls"]
 position = Vector2(776, 320)
@@ -308,27 +237,17 @@ gravity_scale = 0.0
 linear_damp = 0.5
 script = ExtResource("3_pqcnd")
 ball_ID = 9
+moving_damp = 0.4
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="NormalBalls/ball9"]
-modulate = Color(0.8, 0.8, 0, 1)
 scale = Vector2(0.0444445, 0.0444445)
-texture = ExtResource("3_yhhcs")
+texture = ExtResource("13_owb1g")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NormalBalls/ball9"]
+visible = false
 shape = SubResource("CircleShape2D_v10cv")
 debug_color = Color(1, 1, 0, 0.419608)
-
-[node name="Label" type="Label" parent="NormalBalls/ball9"]
-offset_left = -20.0
-offset_top = -17.0
-offset_right = 20.0
-offset_bottom = 17.0
-theme_override_font_sizes/font_size = 24
-text = "➒"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 1
 
 [node name="Pockets" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
@@ -451,6 +370,53 @@ theme_override_font_sizes/font_size = 36
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_lock_ = true
+
+[node name="SunkBallDisplay" type="Node2D" parent="."]
+
+[node name="ballabel1" type="Sprite2D" parent="SunkBallDisplay"]
+position = Vector2(176, 600)
+scale = Vector2(0.0444445, 0.0444445)
+texture = ExtResource("5_nx181")
+
+[node name="ballabel2" type="Sprite2D" parent="SunkBallDisplay"]
+position = Vector2(216, 600)
+scale = Vector2(0.0444445, 0.0444445)
+texture = ExtResource("6_dg31e")
+
+[node name="ballabel3" type="Sprite2D" parent="SunkBallDisplay"]
+position = Vector2(256, 600)
+scale = Vector2(0.0444445, 0.0444445)
+texture = ExtResource("7_1eu2k")
+
+[node name="ballabel4" type="Sprite2D" parent="SunkBallDisplay"]
+position = Vector2(296, 600)
+scale = Vector2(0.0444445, 0.0444445)
+texture = ExtResource("8_55ghd")
+
+[node name="ballabel5" type="Sprite2D" parent="SunkBallDisplay"]
+position = Vector2(336, 600)
+scale = Vector2(0.0444445, 0.0444445)
+texture = ExtResource("9_1ux2p")
+
+[node name="ballabel6" type="Sprite2D" parent="SunkBallDisplay"]
+position = Vector2(376, 600)
+scale = Vector2(0.0444445, 0.0444445)
+texture = ExtResource("10_mniko")
+
+[node name="ballabel7" type="Sprite2D" parent="SunkBallDisplay"]
+position = Vector2(416, 600)
+scale = Vector2(0.0444445, 0.0444445)
+texture = ExtResource("11_ddcnc")
+
+[node name="ballabel8" type="Sprite2D" parent="SunkBallDisplay"]
+position = Vector2(456, 600)
+scale = Vector2(0.0444445, 0.0444445)
+texture = ExtResource("12_36a7t")
+
+[node name="ballabel9" type="Sprite2D" parent="SunkBallDisplay"]
+position = Vector2(496, 600)
+scale = Vector2(0.0444445, 0.0444445)
+texture = ExtResource("13_owb1g")
 
 [connection signal="reset_table" from="." to="NormalBalls/ball1" method="_on_root_reset_table"]
 [connection signal="reset_table" from="." to="NormalBalls/ball2" method="_on_root_reset_table"]

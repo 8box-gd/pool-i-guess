@@ -5,6 +5,8 @@ extends Node2D
 @export var brake_limit = 50.0
 @export var next_shot_limit = 10.0
 @export var max_mouse_dist = 100.0
+@export var moving_damp = 0.5
+@export var brake_damp = 3.0
 
 @onready var cueball = $"cueball root/cueball"
 @onready var guidepoint = $"cueball root/guidepoint"
@@ -23,6 +25,7 @@ var target_ball = 1
 var game_over = false
 
 var ball_list = []
+var label_list = []
 # What a horrendous violation of DRY coding
 # I'll have to do the HeartBeast space shooter tutorial because it looks
 # like it teaches how to make more organized code
@@ -39,6 +42,13 @@ func _ready():
 	$NormalBalls/ball1, $NormalBalls/ball2, $NormalBalls/ball3,
 	$NormalBalls/ball4, $NormalBalls/ball5, $NormalBalls/ball6,
 	$NormalBalls/ball7, $NormalBalls/ball8, $NormalBalls/ball9]
+	
+	label_list = [
+	$SunkBallDisplay/ballabel1, $SunkBallDisplay/ballabel2, $SunkBallDisplay/ballabel3,
+	$SunkBallDisplay/ballabel4, $SunkBallDisplay/ballabel5, $SunkBallDisplay/ballabel6,
+	$SunkBallDisplay/ballabel7, $SunkBallDisplay/ballabel8, $SunkBallDisplay/ballabel9]
+	for i in len(label_list):
+		label_list[i].visible = false
 	
 	for i in len(ball_list):
 		ball_list[i].connect("sunk", on_ball_sunk)
@@ -92,10 +102,10 @@ func _physics_process(delta):
 	
 	# BRAKES
 	if cueball.linear_velocity.length() > brake_limit:
-		cueball.linear_damp = 0.5
+		cueball.linear_damp = moving_damp
 		cueball_slowed = false
 	else:
-		cueball.linear_damp = 3.0
+		cueball.linear_damp = brake_damp
 		cueball_slowed = true
 	if cueball.visible == false:
 		cueball.linear_damp = 10.0
@@ -144,12 +154,14 @@ func reset_cueball():
 	balls_active = [true, true, true, true, true, true, true, true, true]
 	$Table/Polygon2D.color = Color(0.41, 0.41, 0.41)
 	$CenterLabel.text = ""
+	reset_sunk_display()
 	print("Table reset.")
 
 func on_ball_sunk(ID):
 	print("You sunk the ", ID, "-Ball!")
 	balls_active[ID-1] = false
 	sunk_this_turn.append(ID)
+	update_sunk_display()
 	
 	# 9-BALL CHECK
 	
@@ -172,12 +184,20 @@ func find_legality():
 		scratch_count += 1
 		$ScratchLabel.text = str(scratch_count)
 		print("Scratch! Ball sunk out of order. Total scratches: ", scratch_count)
+		if stroke_number == 1:
+			scratch_count -= len(sunk_this_turn)
+			$ScratchLabel.text = str(scratch_count)
+			print("Actually not, since that was the break")
 		if sunk_this_turn.has(9):
 			if stroke_number == 1:
 				scratch_count -= 1
+				$ScratchLabel.text = str(scratch_count)
+				print("You got a 9-Break!")
 				victory()
 			else:
 				trigger_game_over()
+	if scratch_count < 1:
+		$ScratchLabel.text = "0"
 	sunk_this_turn.clear()
 
 func victory():
@@ -191,3 +211,10 @@ func trigger_game_over():
 	$Table/Polygon2D.color = Color(0.57, 0.33, 0.31)
 	$CenterLabel.text = "Game Over\nYou sunk the 9-ball\nillegally.\nPress R to restart"
 	
+func update_sunk_display():
+	for i in len(label_list):
+		label_list[i].visible = not balls_active[i]
+
+func reset_sunk_display():
+	for i in len(label_list):
+		label_list[i].visible = false

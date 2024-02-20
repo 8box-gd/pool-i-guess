@@ -2,6 +2,8 @@ extends RigidBody2D
 
 @export var ball_ID = 0
 @export var brake_limit = 50.0
+@export var moving_damp = 0.5
+@export var brake_damp = 3.0
 
 var reset_point: Vector2 = Vector2.ZERO
 
@@ -30,11 +32,9 @@ func _physics_process(delta):
 				emit_signal("sunk", ball_ID)
 		
 	if linear_velocity.length() > brake_limit:
-		linear_damp = 0.5
-		#print("Not Damped")
+		linear_damp = moving_damp
 	else:
-		linear_damp = 3.0
-		#print("Damped")
+		linear_damp = brake_damp
 	
 	if visible == false:
 		linear_damp = 10.0

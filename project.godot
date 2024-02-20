@@ -13,7 +13,12 @@ config_version=5
 config/name="pool i guess"
 run/main_scene="res://root.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+run/max_fps=60
 config/icon="res://icon.svg"
+
+[display]
+
+window/stretch/mode="canvas_items"
 
 [input]
 
