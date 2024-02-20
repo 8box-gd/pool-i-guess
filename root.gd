@@ -3,6 +3,7 @@ extends Node2D
 
 @export var cue_force = 1000.0
 @export var brake_limit = 50.0
+@export var next_shot_limit = 10.0
 @export var max_mouse_dist = 100.0
 
 @onready var cueball = $"cueball root/cueball"
@@ -32,6 +33,7 @@ func _ready():
 	reset_point = cueball.position
 	cueball.contact_monitor = true
 	$Table/Polygon2D.polygon = $Table/CollisionPolygon2D.polygon
+	$Table/Polygon2D.color = Color(0.41, 0.41, 0.41)
 	
 	ball_list = [
 	$NormalBalls/ball1, $NormalBalls/ball2, $NormalBalls/ball3,
@@ -63,10 +65,10 @@ func _process(delta):
 	# CHECK IF ANYTHING ON TABLE IS MOVING
 	# RUNS ONLY WHEN THE CUEBALL IS DAMPED
 	# IF THIS RAN EVERY FRAME IT WOULD BE A NIGHTMARE
-	if cueball_slowed == true and shot_allowed == false and shot_wait_timer.time_left == 0:
+	if cueball.linear_velocity.length() < next_shot_limit == true and shot_allowed == false and shot_wait_timer.time_left == 0:
 		var slowed_balls = 0
 		for i in len(ball_list):
-			if ball_list[i].linear_velocity.length() < ball_list[i].brake_limit:
+			if ball_list[i].linear_velocity.length() < next_shot_limit:
 				slowed_balls += 1
 		if slowed_balls == 9 and cueball_slowed == true:
 			shot_allowed = true
@@ -84,6 +86,7 @@ func _physics_process(delta):
 		shot_allowed = false
 		shot_wait_timer.start()
 		stroke_number += 1
+		$StrokesLabel.text = str(stroke_number)
 		target_ball = find_target_ball()
 		print("Stroke ", stroke_number, ". Target ball: ", target_ball)
 	
@@ -109,6 +112,9 @@ func scratch():
 	cueball.set_collision_layer_value(1, false)
 	cueball.set_collision_mask_value(1, false)
 	cueball.visible = false
+	scratch_count += 1
+	$ScratchLabel.text = str(scratch_count)
+	print("Scratch! Total scratches: ", scratch_count)
 
 func unscratch():
 	if cueball.visible == false:
@@ -120,8 +126,7 @@ func unscratch():
 			cueball.set_collision_layer_value(1, true)
 			cueball.set_collision_mask_value(1, true)
 			cueball.visible = true
-			scratch_count += 1
-			print("Scratch! Total scratches: ", scratch_count)
+			
 
 func reset_cueball():
 	cueball.linear_velocity = Vector2.ZERO
@@ -134,7 +139,11 @@ func reset_cueball():
 	scratch_count = 0
 	stroke_number = 0
 	game_over = false
+	$StrokesLabel.text = "0"
+	$ScratchLabel.text = "0"
 	balls_active = [true, true, true, true, true, true, true, true, true]
+	$Table/Polygon2D.color = Color(0.41, 0.41, 0.41)
+	$CenterLabel.text = ""
 	print("Table reset.")
 
 func on_ball_sunk(ID):
@@ -158,11 +167,27 @@ func find_legality():
 	if sunk_this_turn.has(target_ball) or sunk_this_turn.size() == 0:
 		print("Shot was legal.")
 		if sunk_this_turn.has(9):
-			print("You win!")
+			victory()
 	else:
 		scratch_count += 1
+		$ScratchLabel.text = str(scratch_count)
 		print("Scratch! Ball sunk out of order. Total scratches: ", scratch_count)
 		if sunk_this_turn.has(9):
-			game_over = true
-			print("You sunk the 9 illegally. Game over.")
+			if stroke_number == 1:
+				scratch_count -= 1
+				victory()
+			else:
+				trigger_game_over()
 	sunk_this_turn.clear()
+
+func victory():
+	print("You win!")
+	$Table/Polygon2D.color = Color(0.31, 0.58, 0.4)
+	$CenterLabel.text = "You win!\nPress R to restart"
+
+func trigger_game_over():
+	game_over = true
+	print("You sunk the 9 illegally. Game over.")
+	$Table/Polygon2D.color = Color(0.57, 0.33, 0.31)
+	$CenterLabel.text = "Game Over\nYou sunk the 9-ball\nillegally.\nPress R to restart"
+	

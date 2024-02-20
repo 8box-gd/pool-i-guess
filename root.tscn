@@ -22,10 +22,11 @@ cue_force = 1500.0
 physics_material_override = SubResource("PhysicsMaterial_5x4fs")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Table"]
-polygon = PackedVector2Array(64, 64, 56, 96, 64, 128, 96, 144, 96, 504, 64, 520, 56, 552, 64, 584, 96, 592, 128, 584, 144, 552, 536, 552, 544, 576, 576, 592, 608, 576, 616, 552, 1008, 552, 1024, 584, 1056, 592, 1088, 584, 1096, 552, 1088, 520, 1056, 504, 1056, 144, 1088, 128, 1096, 96, 1088, 64, 1056, 56, 1024, 64, 1008, 96, 616, 96, 608, 72, 576, 56, 544, 72, 536, 96, 144, 96, 128, 64, 96, 56, 64, 64, 0, 0, 1152, 0, 1152, 648, 0, 648, 0, 0)
+polygon = PackedVector2Array(64, 64, 56, 96, 64, 128, 96, 152, 96, 496, 64, 520, 56, 552, 64, 584, 96, 592, 128, 584, 152, 552, 536, 552, 544, 576, 576, 592, 608, 576, 616, 552, 1000, 552, 1024, 584, 1056, 592, 1088, 584, 1096, 552, 1088, 520, 1056, 496, 1056, 152, 1088, 128, 1096, 96, 1088, 64, 1056, 56, 1024, 64, 1000, 96, 616, 96, 608, 72, 576, 56, 544, 72, 536, 96, 152, 96, 128, 64, 96, 56, 64, 64, 0, 0, 1152, 0, 1152, 648, 0, 648, 0, 0)
 
 [node name="Polygon2D" type="Polygon2D" parent="Table"]
-color = Color(0.411765, 0.411765, 0.411765, 1)
+color = Color(0.41, 0.41, 0.41, 1)
+polygon = PackedVector2Array(64, 64, 56, 96, 64, 128, 96, 152, 96, 496, 64, 520, 56, 552, 64, 584, 96, 592, 128, 584, 152, 552, 536, 552, 544, 576, 576, 592, 608, 576, 616, 552, 1000, 552, 1024, 584, 1056, 592, 1088, 584, 1096, 552, 1088, 520, 1056, 496, 1056, 152, 1088, 128, 1096, 96, 1088, 64, 1056, 56, 1024, 64, 1000, 96, 616, 96, 608, 72, 576, 56, 544, 72, 536, 96, 152, 96, 128, 64, 96, 56, 64, 64, 0, 0, 1152, 0, 1152, 648, 0, 648, 0, 0)
 
 [node name="cueball root" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
@@ -39,7 +40,7 @@ contact_monitor = true
 linear_damp = 0.5
 
 [node name="Sprite2D" type="Sprite2D" parent="cueball root/cueball"]
-modulate = Color(0.65098, 0.65098, 0.65098, 1)
+modulate = Color(0.85098, 0.85098, 0.85098, 1)
 scale = Vector2(0.0444445, 0.0444445)
 texture = ExtResource("3_yhhcs")
 
@@ -192,7 +193,7 @@ ball_ID = 5
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="NormalBalls/ball5"]
-modulate = Color(0.811765, 0.392157, 0, 1)
+modulate = Color(0.921569, 0.443137, 0, 1)
 scale = Vector2(0.0444445, 0.0444445)
 texture = ExtResource("3_yhhcs")
 
@@ -221,7 +222,7 @@ ball_ID = 6
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="NormalBalls/ball6"]
-modulate = Color(0, 0.643137, 0.0627451, 1)
+modulate = Color(0, 0.705882, 0.0627451, 1)
 scale = Vector2(0.0444445, 0.0444445)
 texture = ExtResource("3_yhhcs")
 
@@ -419,6 +420,37 @@ texture = ExtResource("3_yhhcs")
 [node name="ShotWaitTimer" type="Timer" parent="."]
 wait_time = 0.25
 one_shot = true
+
+[node name="StrokesLabel" type="Label" parent="."]
+offset_left = 328.0
+offset_top = 16.0
+offset_right = 368.0
+offset_bottom = 85.0
+theme_override_font_sizes/font_size = 50
+text = "0"
+horizontal_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="ScratchLabel" type="Label" parent="."]
+offset_left = 784.0
+offset_top = 16.0
+offset_right = 824.0
+offset_bottom = 85.0
+theme_override_colors/font_color = Color(1, 0.831373, 0.831373, 1)
+theme_override_font_sizes/font_size = 50
+text = "0"
+horizontal_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="CenterLabel" type="Label" parent="."]
+offset_left = 384.0
+offset_top = 192.0
+offset_right = 768.0
+offset_bottom = 448.0
+theme_override_font_sizes/font_size = 36
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
 
 [connection signal="reset_table" from="." to="NormalBalls/ball1" method="_on_root_reset_table"]
 [connection signal="reset_table" from="." to="NormalBalls/ball2" method="_on_root_reset_table"]
